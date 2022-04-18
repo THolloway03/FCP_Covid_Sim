@@ -1,20 +1,6 @@
 #!/usr/bin/env python3
 """
 
-
-#Have it where the cells are interacting with one another
-
-#when highly infective the cells could have an infection rate of 2.0 so 
-#the first cell will infect 2 other cells
-#this makes the probability of 1 cell infecting 2 of its neighbors by 2/6
-
-#of course this is assuming that there is no vaccination nor restrictions such as social distancing
-
-#when restrictions and vaccination is in the model we will then reduce the rate of infection
-
-#Vaccinations will reduce the rate of infection by more than a half.
-
-
 from matplotlib.plt import plt
 import math
 import random
@@ -183,7 +169,8 @@ class Interaction():
 
 
 """somehow get the readings off my code and be able to transfer those reading
-into the line graph animation for Charlie"""
+into the line graph animation for Charlie
+"""
 
 
 
