@@ -45,9 +45,7 @@ count = 0
 # Double for loop to run through each matrix
 for y in range(hexMatrix_size):
     for x in range(hexMatrix_size):
-        
-        count = count+1
-        
+                
         if hexMatrix[x][y] == 1: #checks if infected 
         
             if y+1 != hexMatrix_size:
@@ -63,8 +61,9 @@ for y in range(hexMatrix_size):
 
             
             if x-1 > 0:
-                Infected = doesInfect()            
-                hexMatrix[x-1][y] = Infected
+                Infected = doesInfect()   
+                if hexMatrix[x-1][y] == 0:
+                    hexMatrix[x-1][y] = Infected
                 Infected = 0
 
             
@@ -86,12 +85,26 @@ for y in range(hexMatrix_size):
             
         
         #Used to display to user for testing purposes (not complete)
-        complete_Array = (complete_Array + str(hexMatrix[x][y])) 
+        complete_Array = (complete_Array + str(hexMatrix[x][y]) + ' ') 
         if count == hexMatrix_size-1: 
-            complete_Array = complete_Array + '\n' #used to add the entire array to a displayable string
+            complete_Array = complete_Array + '\n' + ' ' #used to add the entire array to a displayable string
             if y % 2 == 1:
                 complete_Array = complete_Array + ' '
+                
+        count = count+1
+
     count = 0
             
+complete_Array= ' '+ complete_Array
 print(complete_Array)
+
+
+
+
+
+
+
+
+
+
         
