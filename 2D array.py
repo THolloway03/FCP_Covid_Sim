@@ -98,6 +98,8 @@ for y in range(hexMatrix_size):
 complete_Array= ' '+ complete_Array
 print(complete_Array)
 
+#Main issue with the code is that if the infected infects another thats further in the array, so if 5,6 infects 6,6 it will treat 6,6 as if it was infected before
+#which might be an issue but i didnt know a work around in my design if u can make it work that'd be great
 
 
 
