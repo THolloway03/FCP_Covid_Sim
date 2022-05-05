@@ -13,12 +13,17 @@ from matplotlib.lines import Line2D
 #Using the list I can iterate through adding each member to the memeber before and dividing it by the total number
 # of suseptable hexagons and multiplying by 100 to get the percentage of infected, dead, recovered or suspetable
 #and append these values to the graph
-
+def calc_percent(total_people, list):
+    percentage = (list/total_people)*100
+    return percentage
 
 # Test data to show how it works in the simulation
 duration = 100#int(input("input the duration of the simulation"))
 e = 2.7
-l1 = [random.randint(-10,4)+(i**1.68)/(random.randint(13,14)) for i in range(0,160,2)]#suseptable
+l1 = [calc_percent(100, suseptable_list[i]) for i in range(0, len(suseptable_list))]#suseptable
+
+#ill do the same for each after i get the lists through for your end
+
 l2 = [random.randint(0,4)+(i**1.5)/(random.randint(9,11)) for i in range(0,160,2)]#infected
 l3 = [5*e**(0.2*i) for i in range(0,duration)]#recovered
 l4 = [random.randint(0,4)+(i**1.6)/(random.randint(10,13)) for i in range(0,160,2)]#dead
