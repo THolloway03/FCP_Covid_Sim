@@ -11,11 +11,11 @@ import random
     
 # used for testing
 def doesInfect():
-    if random.randrange(1,10) == 1 :
+     if random.randrange(1,10) == 1:
         return 1
-    else: 
+     else:
         return 0
-    
+         
 
     
 # Used to find size that user wants the graph to be and allows it to be able to run a full number since its 
@@ -41,65 +41,76 @@ complete_Array = ' '
 Infected = 0
 hexMatrix[3][3] = 1 #TEST
 count = 0
-
+day_count = 0
 # Double for loop to run through each matrix
-for y in range(hexMatrix_size):
-    for x in range(hexMatrix_size):
+while day_count <= 9:
+    for y in range(hexMatrix_size):
+        for x in range(hexMatrix_size):
+                    
+            if hexMatrix[x][y] == 1: #checks if infected 
+            
+                if y+1 != hexMatrix_size:
+                    Infected = doesInfect()
+                    if hexMatrix[x][y+1] == 0:
+                        hexMatrix[x][y+1] = Infected
+                        Infected = 0
                 
-        if hexMatrix[x][y] == 1: #checks if infected 
-        
-            if y+1 != hexMatrix_size:
-                Infected = doesInfect()
-                hexMatrix[x][y+1] = Infected
-                Infected = 0
-            
-            
-            if y-1 > 0:
-                Infected = doesInfect()
-                hexMatrix[x][y-1] = Infected
-                Infected = 0
-
-            
-            if x-1 > 0:
-                Infected = doesInfect()   
-                if hexMatrix[x-1][y] == 0:
-                    hexMatrix[x-1][y] = Infected
-                Infected = 0
-
-            
-            if x-1 > 0 and y-1 > 0:
-                Infected = doesInfect()
-                hexMatrix[x-1][y-1] = Infected
-                Infected = 0
-
-            
-            if x+1 != hexMatrix_size:  
-                Infected = doesInfect()            
-                hexMatrix[x+1][y] = Infected
-                Infected = 0
-            
-            if x+1 < hexMatrix_size and y-1 > 0:
-                Infected = doesInfect()
-                hexMatrix[x+1][y-1] = Infected
-                Infected = 0
-            
-        
-        #Used to display to user for testing purposes (not complete)
-        complete_Array = (complete_Array + str(hexMatrix[x][y]) + ' ') 
-        if count == hexMatrix_size-1: 
-            complete_Array = complete_Array + '\n' + ' ' #used to add the entire array to a displayable string
-            if y % 2 == 1:
-                complete_Array = complete_Array + ' '
                 
-        count = count+1
-
-    count = 0
+                if y-1 > -1:
+                    Infected = doesInfect()
+                    if hexMatrix[x][y-1] == 0:
+                        hexMatrix[x][y-1] = Infected
+                        Infected = 0
+        
+                
+                if x-1 > -1:
+                    Infected = doesInfect()   
+                    if hexMatrix[x-1][y] == 0:
+                        hexMatrix[x-1][y] = Infected
+                        Infected = 0
+    
+                
+                if x-1 > -1 and y-1 > -1:
+                    Infected = doesInfect()
+                    if hexMatrix[x-1][y-1] == 0:
+                        hexMatrix[x-1][y-1] = Infected
+                        Infected = 0
+    
+                
+                if x+1 != hexMatrix_size:  
+                    Infected = doesInfect()    
+                    if hexMatrix[x+1][y] == 0:
+                        hexMatrix[x+1][y] = Infected
+                        Infected = 0
+                
+                if x+1 < hexMatrix_size and y-1 > -1:
+                    Infected = doesInfect()
+                    if hexMatrix[x+1][y-1] == 0:
+                        hexMatrix[x+1][y-1] = Infected
+                        Infected = 0
+                
             
-complete_Array= ' '+ complete_Array
-print(complete_Array)
+            #Used to display to user for testing purposes 
+            complete_Array = (complete_Array + str(hexMatrix[x][y]) + ' ') 
+            if count == hexMatrix_size-1: 
+                complete_Array = complete_Array + '\n' + ' ' #used to add the entire array to a displayable string
+                if y % 2 == 1:
+                    complete_Array = complete_Array + ' '
+                    
+            count = count+1
+    
+        count = 0
+    day_count = day_count+1                
+    complete_Array= ' '+ complete_Array
+    print(day_count)
+    print(complete_Array)
+    complete_Array = ' '
 
-#Main issue with the code is that if the infected infects another thats further in the array, so if 5,6 infects 6,6 it will treat 6,6 as if it was infected before
-#which might be an issue but i didnt know a work around in my design if u can make it work that'd be great
+# if hexMatrix_size <= 10: #infects 1 random person if less than or equal to 100  
+#     hexMatrix[random.randrange(0,hexMatrix_size-1)] = 1 
+# else: #infects 2 random people if above 100 people 
+#         hexMatrix[random.randrange(0,hexMatrix_size-1)] = 1
+#         hexMatrix[random.randrange(0,hexMatrix_size-1)] = 1
 
 
 
