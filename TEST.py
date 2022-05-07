@@ -29,6 +29,8 @@ RECOVERED = 2
 DEAD = 3
 VACCINATED = 4
 
+#Here we have designated colours of cells for the relevant statuses that each cell may have
+
 COLOURMAP = {
     'susceptible': 'green',
     'infected': 'red',
@@ -75,7 +77,7 @@ def vaccinated(value):
         return 4
     else: 
         return value 
-    
+#The different rate values     
 rate_of_infection =3.0
 chance_of_recovery = 0.6
 fatality_rate = 0.05
@@ -126,10 +128,10 @@ while day_count <= int(Time_duration):
     for y in range(hexMatrix_size):
         for x in range(hexMatrix_size):
                             
-            if hexMatrix[x][y] == 1: #checks if infected 
+            if hexMatrix[x][y] == 1: #checks if the cel is already infected 
                 # if rate_of_infection > round(random.random(), 2):  
                 #     hexMatrix[x][y] == 1                    
-                if y+1 != hexMatrix_size:
+                if y+1 != hexMatrix_size: # checks to see if the y value of the next cell is within the current grid area, if not then the cell can't be infected
                     Infected = doesInfect()
                     if hexMatrix[x][y+1] == 0:
                         hexMatrix[x][y+1] = Infected
@@ -153,7 +155,7 @@ while day_count <= int(Time_duration):
                         hexMatrix[x-1][y-1] = Infected
                         Infected = 0   
                 
-                if x+1 != hexMatrix_size:  
+                if x+1 != hexMatrix_size:  # checks to see if the x value of the next cell is within the current grid area, if not then the cell can't be infected 
                     Infected = doesInfect()    
                     if hexMatrix[x+1][y] == 0:
                         hexMatrix[x+1][y] = Infected
@@ -165,7 +167,7 @@ while day_count <= int(Time_duration):
                         hexMatrix[x+1][y-1] = Infected
                         Infected = 0
                 # num_infected +=1
-                # when people recover        
+                # when people recover, we must change their status to 2        
                 if chance_of_recovery > round(random.random(), 2):  
                     hexMatrix[x][y] == 2
                     
@@ -208,7 +210,8 @@ while day_count <= int(Time_duration):
                             Recovered = 1
                     # num_recovered += 1
                     # num_infected -= 1
-                #people who dont recover
+                #People who don't recover will die, so we must change their status as well
+		        # We compare the chance of fatality to a random value for each cell and if it is greater, then the cell will die
                 if fatality_rate >  round(random.random(),2):
                     hexMatrix[x][y] = 3
                 if hexMatrix[x][y] == 3:
@@ -247,7 +250,9 @@ while day_count <= int(Time_duration):
                         if hexMatrix[x+1][y-1] == 1:
                             hexMatrix[x+1][y-1] = Dead
                             Dead = 1
-                #vaccinations            
+                                     
+                #Cells become vaccinated 
+		        # We compare the vaccination probability to a random value for each cell and if it is greater, then the cell will chance it's status to vaccinated 
                 if rate_of_vaccination >  round(random.random(),2):
                     hexMatrix[x][y] = 4
                     
@@ -289,7 +294,8 @@ while day_count <= int(Time_duration):
                             Vaccinated = 1
                     # num_dead += 1
                     # num_infected -= 1
-                
+    
+    #We add up the total number cells which are infected, recovered, dead or vaccinated at any time                 
     for y in range(hexMatrix_size):
         for x in range(hexMatrix_size):
             
@@ -374,7 +380,8 @@ while day_count <= int(Time_duration):
     
     plt.legend(custom_lines, ['susceptible','infected', 'recovered', 'dead', 'vaxcinated'])
 # customize the x ticks
-#plt.xticks([e+1 for e in x1])    
+#plt.xticks([e+1 for e in x1]) 
+#We print the cell grid and the number of infected, recovered, dead and vaccinated cells day by day
     day_count = day_count+1                
     complete_Array= ' '+ complete_Array
     #displaying the counts after each day wh
