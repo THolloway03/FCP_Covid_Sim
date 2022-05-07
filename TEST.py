@@ -317,7 +317,7 @@ while day_count <= int(Time_duration):
             Count = Count+1
     
         Count = 0
-        
+    #Takes the number of people in each list of the 4 statuses ( Infected, recovered, dead and vaccinated) compared to the total number of people, and calculate a percentage
     def calc_percent(total_people, list):
         percentage = (list/total_people)*100
         return percentage
