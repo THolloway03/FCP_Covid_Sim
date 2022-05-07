@@ -288,6 +288,9 @@ while day_count <= int(Time_duration):
     for y in range(hexMatrix_size):
         for x in range(hexMatrix_size):
             
+            if hexMatrix[x][y] == 0:
+                num_susceptible += 1
+                
             if hexMatrix[x][y] == 1:
                 num_infected +=1
             elif hexMatrix[x][y] == 2:
@@ -314,6 +317,8 @@ while day_count <= int(Time_duration):
     complete_Array= ' '+ complete_Array
     #displaying the counts after each day wh
     print("Day: ",day_count)
+    print("Susceptible:", num_susceptible)
+    num_susceptible = 0
     print("Infected: ",num_infected)
     num_infected = 0
     print("Recovered: ",num_recovered)
