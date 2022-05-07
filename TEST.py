@@ -70,11 +70,11 @@ def dead():
     else: 
         return 2
     
-def vaccinated():
+def vaccinated(value):
     if random.randrange(1,10) == 4 :
         return 4
     else: 
-        return 2 or 3
+        return value 
     
 rate_of_infection =3.0
 chance_of_recovery = 0.6
@@ -113,12 +113,11 @@ hexMatrix = [[0 for x in range(hexMatrix_size)] for y in range(hexMatrix_size)]
 complete_Array = ' '
 Infected = 0
 
-hexMatrix[3][3] = 1
-# if hexMatrix_size <= 10: #infects 1 random person if less than or equal to 100  
-#     hexMatrix[random.randrange(0,hexMatrix_size-1)][random.randrange(0, hexMatrix_size-1)] = 1 
-# else: #infects 2 random people if above 100 people 
-#     hexMatrix[random.randrange(0,hexMatrix_size-1)] = 1
-#     hexMatrix[random.randrange(0,hexMatrix_size-1)] = 1
+if hexMatrix_size <= 10: #infects 1 random person if less than or equal to 100  
+    hexMatrix[random.randrange(0,hexMatrix_size-1)][random.randrange(0, hexMatrix_size-1)] = 1 
+else: #infects 2 random people if above 100 people 
+    hexMatrix[random.randrange(0,hexMatrix_size-1)][random.randrange(0, hexMatrix_size-1)] = 1
+    hexMatrix[random.randrange(0,hexMatrix_size-1)][random.randrange(0, hexMatrix_size-1)] = 1
     
 Count = 0
 day_count = 0
@@ -254,37 +253,37 @@ while day_count <= int(Time_duration):
                     
                 if hexMatrix[x][y] == 4:
                     if y+1 != hexMatrix_size:
-                        Vaccinated = vaccinated()
+                        Vaccinated = vaccinated(hexMatrix[x][y])
                         if hexMatrix[x][y+1] == 1:
                             hexMatrix[x][y+1] = Vaccinated
                             Vaccinated = 1             
                     
                     if y-1 > -1:
-                        Vaccinated = vaccinated()
+                        Vaccinated = vaccinated(hexMatrix[x][y])
                         if hexMatrix[x][y-1] == 1:
                             hexMatrix[x][y-1] = Vaccinated
                             Vaccinated = 1       
                     
                     if x-1 > -1:
-                        Vaccinated = vaccinated()   
+                        Vaccinated = vaccinated(hexMatrix[x][y])   
                         if hexMatrix[x-1][y] == 1:
                             hexMatrix[x-1][y] = vaccinated
                             Vaccinated = 1   
                     
                     if x-1 > -1 and y-1 > -1:
-                        Vaccinated = vaccinated()
+                        Vaccinated = vaccinated(hexMatrix[x][y])
                         if hexMatrix[x-1][y-1] == 1:
                             hexMatrix[x-1][y-1] = Vaccinated
                             Vaccinated = 1   
                     
                     if x+1 != hexMatrix_size:  
-                        Vaccinated = vaccinated()    
+                        Vaccinated = vaccinated(hexMatrix[x][y])    
                         if hexMatrix[x+1][y] == 1:
                             hexMatrix[x+1][y] = Vaccinated
                             Vaccinated = 1
                     
                     if x+1 < hexMatrix_size and y-1 > -1:
-                        Vaccinated = vaccinated()
+                        Vaccinated = vaccinated(hexMatrix[x][y])
                         if hexMatrix[x+1][y-1] == 1:
                             hexMatrix[x+1][y-1] = Vaccinated
                             Vaccinated = 1
@@ -310,7 +309,7 @@ while day_count <= int(Time_duration):
                 
             #Used to display to user for testing purposes 
             complete_Array = (complete_Array + str(hexMatrix[x][y]) + ' ') 
-            if count == hexMatrix_size-1: 
+            if Count == hexMatrix_size-1: 
                 complete_Array = complete_Array + '\n' + ' ' #used to add the entire array to a displayable string
                 if y % 2 == 1:
                     complete_Array = complete_Array + ' '
@@ -381,7 +380,6 @@ while day_count <= int(Time_duration):
     #displaying the counts after each day wh
     print("Day: ",day_count)
     print("Susceptible:", num_susceptible)
-    susce
     num_susceptible = 0
     print("Infected: ",num_infected)
     num_infected = 0
